@@ -1,8 +1,8 @@
 const Model = require('sequelize').Model;
 
 module.exports = function(sequelize, DataType) {
-    class User extends Model {}
-    User.init({
+    class Stuffs extends Model {}
+    Stuffs.init({
 
         id: {
             autoIncrement: true,
@@ -10,35 +10,39 @@ module.exports = function(sequelize, DataType) {
             type: DataType.INTEGER
         },
 
-        firstname: {
+        type: {
             type: DataType.STRING,
             notEmpty: true
         },
 
-        lastname: {
+        uuid: {
             type: DataType.STRING,
             notEmpty: true
         },
-        email: {
+        token: {
             type: DataType.STRING,
-            validate: {
-                isEmail: true
-            }
+            notEmpty: true
         },
-        password: {
+        roomHint: {
             type: DataType.STRING,
-            allowNull: false
+            notEmpty: false
         },
-        last_login: {
-            type: DataType.DATE
+        name: {
+            type: DataType.STRING,
+            notEmpty: true
         },
-        status: {
-            type: DataType.ENUM('active', 'inactive'),
-            defaultValue: 'active'
+        nicknames: {
+            type: DataType.STRING,
+            notEmpty: false
+        },
+        option: {
+            type: DataType.STRING,
+            notEmpty: false
         }
 
 
+
     }, {sequelize});
-    return User;
+    return Stuffs;
 
 };
