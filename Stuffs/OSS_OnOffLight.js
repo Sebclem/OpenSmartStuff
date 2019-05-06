@@ -1,9 +1,10 @@
 const all = require("./index");
 const googleTools = require("../tools/googleTools");
+const wsTools = require("../tools/WsTools");
+
 
 let onOffLight = Object.assign({}, all.types.LIGHT);
 let onOffTrait = Object.assign({}, all.traits.OnOff);
-let isOn = false;
 onOffLight.device_info.manufacturer = 'OpenSmartStuff';
 onOffLight.device_info.model = 'OnOffLight';
 onOffLight.device_info.hwVersion = '0.1';
@@ -13,17 +14,35 @@ onOffTrait.states.get = function (state) {
     console.log("Get for id " + id);
 };
 
-onOffTrait.commands.OnOff = function (UUID, params) {
-    isOn = params.on;
-    //TODO send command to object
-    return {
-        status: "SUCCESS",
-        states: {
-            online: true,
-            on: isOn
-        }
+onOffTrait.commands.OnOff = async function (UUID, params) {
+    let isOn = params.on;
+    const connectedStuffs = require('../Stuffs').connectedStuffs;
+    if (connectedStuffs[UUID] == null)
+        return {
+            online: false
+        };
 
+    let ws = connectedStuffs[UUID].ws;
+    ws.send(JSON.stringify({type: "COMMAND", on: isOn}));
+    let state = await wsTools.waitForResponse(UUID);
+    if (state == null) {
+        return {
+            status: "ERROR",
+            errorCode: 'deviceTurnedOff'
+
+        }
+    } else {
+
+        return {
+            status: "SUCCESS",
+            states: {
+                online: true,
+                on: isOn
+            }
+
+        }
     }
+
 };
 
 onOffLight.traits.OnOff = onOffTrait;
@@ -48,12 +67,30 @@ onOffLight.getSync = function (stuffInDb) {
     return finalObject;
 };
 
-onOffLight.getState = function(UUID){
-    //TODO get the state of the light
-    return {
-        online: true,
-        on: isOn
+onOffLight.getState = async function (UUID) {
+    const connectedStuffs = require('../Stuffs').connectedStuffs;
+    if(connectedStuffs[UUID] == null)
+        return {
+            online: false
+        };
+
+    let ws = connectedStuffs[UUID].ws;
+    ws.send(JSON.stringify({type: "GET_STATE"}));
+    let state = await wsTools.waitForResponse(UUID);
+    if(state == null){
+        return {
+            online: false
+        }
     }
+    else{
+
+        return {
+            online: true,
+            on: state.on
+        }
+    }
+
+
 };
 module.exports = onOffLight;
 

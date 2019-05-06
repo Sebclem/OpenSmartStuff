@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('SmartHomeV2:server');
 var http = require('http');
+var webSock = require('../routes/websocket');
 
 /**
  * Get port from environment and store in Express.
@@ -28,6 +29,7 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
 
 /**
  * Normalize a port into a number, string, or false.
@@ -88,3 +90,4 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+setTimeout(function (){webSock.createWS(server)},2000);

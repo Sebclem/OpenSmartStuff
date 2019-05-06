@@ -52,14 +52,14 @@ async function getUserFromAuthorization(authorization) {
 }
 
 
-async function execute(commands) {
+async function execute(user, commands) {
     let command = commands.execution[0].command.replace("action.devices.commands.", "");
     let params = commands.execution[0].params;
     let idList = [];
     for (const device in commands.devices) {
         idList.push({id: commands.devices[device].id});
     }
-    let stuffsIdDb = await stuffRepo.findAll({
+    let stuffsIdDb = await user.getStuffs({
         where: {
             [Op.or]: idList
         }
@@ -76,7 +76,7 @@ async function execute(commands) {
         let inDb = stuffsIdDb[index];
         let stuffObject = stuffsList[inDb.type];
         let objectCommands = getCommand(stuffObject);
-        let state = objectCommands[command]("",params);
+        let state = objectCommands[command](inDb.uuid,params);
         if(state.status === "SUCCESS"){
             success.ids.push(inDb.id);
             if(success.states === null){
@@ -95,9 +95,9 @@ async function execute(commands) {
 
     let responseCommands = [];
     if(success.ids.length > 0)
-        responseCommands.push(success);
+        responseCommands = responseCommands.concat(success);
     if(otherStatus.length > 0)
-        responseCommands.push(otherStatus);
+        responseCommands = responseCommands.concat(otherStatus);
     return responseCommands;
 
 }

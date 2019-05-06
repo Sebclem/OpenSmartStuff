@@ -9,7 +9,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
 
     },
     AIRFRESHENER: {
@@ -22,7 +25,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     AIRPURIFIER: {
         traits: {},
@@ -34,7 +40,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     BLINDS: {
         traits: {},
@@ -46,7 +55,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     CAMERA: {
         traits: {},
@@ -58,7 +70,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     COFFEE_MAKER: {
         traits: {},
@@ -70,7 +85,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     DISHWASHER: {
         traits: {},
@@ -82,7 +100,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     DRYER: {
         traits: {},
@@ -94,7 +115,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     FAN: {
         traits: {},
@@ -106,7 +130,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     FIREPLACE: {
         traits: {},
@@ -118,7 +145,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     HEATER: {
         traits: {},
@@ -130,7 +160,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     KETTLE: {
         traits: {},
@@ -142,7 +175,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     LIGHT: {
         traits: {},
@@ -154,7 +190,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     OUTLET: {
         traits: {},
@@ -166,7 +205,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     OVEN: {
         traits: {},
@@ -178,7 +220,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     REFRIGERATOR: {
         traits: {},
@@ -190,7 +235,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     SCENE: {
         traits: {},
@@ -202,7 +250,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     SPRINKLER: {
         traits: {},
@@ -214,7 +265,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     SWITCH: {
         traits: {},
@@ -226,7 +280,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     THERMOSTAT: {
         traits: {},
@@ -238,7 +295,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     VACUUM: {
         traits: {},
@@ -250,7 +310,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     },
     WASHER: {
         traits: {},
@@ -262,7 +325,10 @@ const types = {
         },
         getSync: function (stuffInDb) {
         },
-        getState: function(UUID){}
+        getState: function(UUID){},
+        updateState: function (stateObject) {
+
+        }
     }
 };
 
@@ -349,5 +415,5 @@ exports.traits = traits;
 const OSS_OnOffLight = require("./OSS_OnOffLight");
 let stuffs = {};
 stuffs.OSS_OnOffLight = OSS_OnOffLight;
-
+exports.connectedStuffs = {};
 exports.stuffs = stuffs;

@@ -4,7 +4,7 @@ const { smarthome } = require('actions-on-google');
 // Create an app instance
 const app = smarthome({key: process.env.GOOGLE_API_KEY });
 const models = require("../models");
-const userRepo = models.user;
+
 const stuffRepo = models.stuffs;
 const googleTools = require("../tools/googleTools");
 const stuffsList = require("../Stuffs").stuffs;
@@ -16,7 +16,21 @@ const stuffsList = require("../Stuffs").stuffs;
 
 app.onExecute(async (body, headers) => {
     console.debug("[GOOGLE] Receive Execute");
-    let responseCommand = await googleTools.execute(body.inputs[0].payload.commands[0]);
+    let authorization = headers.authorization;
+    let user = await googleTools.getUserFromAuthorization(authorization);
+    if(user == null){
+        return {
+            requestId: body.requestId,
+            payload: {errorCode: "authFailure"}
+        }
+    }
+    let responseCommand = await googleTools.execute(user, body.inputs[0].payload.commands[0]);
+    console.log({
+        requestId: body.requestId,
+        payload: {
+            commands: responseCommand
+        }
+    });
     return {
         requestId: body.requestId,
         payload: {
@@ -29,6 +43,12 @@ app.onQuery(async (body, headers) => {
     console.debug("[GOOGLE] Receive Query");
     let authorization = headers.authorization;
     let user = await googleTools.getUserFromAuthorization(authorization);
+    if(user == null){
+        return {
+            requestId: body.requestId,
+            payload: {errorCode: "authFailure"}
+        }
+    }
     let devices = body.inputs[0].payload.devices;
     let toReturn = {};
     for(const device of devices){
@@ -37,7 +57,7 @@ app.onQuery(async (body, headers) => {
         if(inDb){
             let stuffObject = stuffsList[inDb.type];
 
-            toReturn[device.id] = stuffObject.getState(inDb.uuid);
+            toReturn[device.id] = await stuffObject.getState(inDb.uuid);
         }
     }
     return {
@@ -52,6 +72,12 @@ app.onSync(async (body, headers) => {
     console.debug("[GOOGLE] Receive Sync");
     let authorization = headers.authorization;
     let user = await googleTools.getUserFromAuthorization(authorization);
+    if(user == null){
+        return {
+            requestId: body.requestId,
+            payload: {errorCode: "authFailure"}
+        }
+    }
     let stuffs = await user.getStuffs();
     let devices = [];
     stuffs.forEach((stuff) => {
