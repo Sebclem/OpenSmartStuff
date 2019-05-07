@@ -37,11 +37,18 @@ module.exports = function (passport, user) {
                         };
                     User.create(data).then(function (newUser, created) {
                         if (!newUser) {
-                            return done(null, false);
+                            return done(null, false, {message: "Can't create user"});
                         }
                         if (newUser) {
                             return done(null, newUser);
                         }
+                    }).catch(function (error) {
+                        if(error.errors[0].path === "email"){
+                            return done(null, false, {
+                                message: "Email is invalid"
+                            })
+                        }
+
                     });
                 }
             });

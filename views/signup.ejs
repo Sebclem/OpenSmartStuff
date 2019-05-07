@@ -2,28 +2,95 @@
 <html>
 
 <head>
-    <title></title>
+    <title>Sign in - OSS</title>
+    <link rel="stylesheet" href="/css/materialize.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+        .input-field label{
+            pointer-events: all !important;
+        }
+
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active  {
+            -webkit-box-shadow: 0 0 0 30px #37474f inset !important;
+            -webkit-text-fill-color: white !important;
+        }
+    </style>
 </head>
 
-<body>
-<form id="signup" name="signup" method="post" action="/signup">
+<body class="grey darken-4">
 
-    <label for="email">Email Address</label>
-    <input id="email" class="text" name="email" type="email" />
+<header>
+    <%- include('header', {page: 'signup'});%>
 
-    <label for="firstname">Firstname</label>
-    <input id="firstname" name="firstname" type="text" />
+</header>
+<main class="container valign-wrapper">
+    <div class="row">
+        <div class="col s12 m10 offset-m1 l8 offset-l2 center card-panel blue-grey darken-3 z-depth-5" style="border-radius: 10px;">
+            <form id="signup" name="signup" method="post" action="/signup" class="row">
+                <div class="col s12 center blue darken-2" style="border-radius: 10px 10px 0 0">
+                    <h3 class="white-text" style="margin-top: 16px"><b>Register</b></h3>
+                </div>
+                <div class="col s12 divider grey lighten-1 z-depth-2"></div>
+                <div class="col s12 divider grey lighten-1 z-depth-2" style="margin-bottom: 10px"></div>
+                <% if(error[0]) {%>
+                    <div class="col s12 center">
+                        <h5 class="red-text"><%= error[0] %></h5>
+                    </div>
+                <%}%>
+                <div class="col offset-s1 s10 input-field">
+                    <label for="email">Email Address</label>
+                    <input id="email" class="white-text validate" name="email" type="email"  required autocomplete="email"/>
+                </div>
+                <div class="col offset-s1 s10 input-field">
+                    <label for="firstname" class="">First Name</label>
+                    <input id="firstname" class="white-text validate" name="firstname" type="text" required autocomplete="given-name"/>
+                </div>
+                <div class="col offset-s1 s10 input-field">
+                    <label for="lastname" class="">Last Name</label>
+                    <input id="lastname" class="white-text validate" name="lastname" type="text" required autocomplete="family-name"/>
+                </div>
 
-    <label for="lastname">Lastname</label>
-    <input id="lastname" name="lastname" type="text" />
+                <div class="col offset-s1 s10 input-field">
+                    <label for="password" class="">Password</label>
+                    <input id="password" class="white-text validate" name="password" type="password" required autocomplete="new-password "/>
+                </div>
 
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" />
+                <div class="col s12 center">
+                    <button class="btn waves-effect waves-light green wave" type="submit" >register</button>
+                </div>
 
-    <input class="btn" type="submit" value="Sign Up" />
+            </form>
+            <div class="row">
+                <div class="col s12 divider grey lighten-1 z-depth-2"></div>
+                <div class="col s12 divider grey lighten-1 z-depth-2"></div>
+            </div>
+            <div class="row">
+                <div class="col s12 center" >
+                    <p class="grey-text" style="margin-top: 0">Already have an account ?</p>
+                </div>
+                <div class="col s12 center">
+                    <a class="btn waves-effect blue" href="/signin">login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
-</form>
+
 
 </body>
-
+<script src="/js/materialize.js"></script>
 </html>

@@ -3,10 +3,10 @@ var router = express.Router();
 
 module.exports.router = function (passport) {
     router.get('/signup', function (req, res, next) {
-        res.render('signup');
+        res.render('signup',{error: req.flash('error')});
     });
 
-    router.post('/signup', passport.authenticate('local-signup', {successRedirect: '/', failureRedirect: '/signup'}));
+    router.post('/signup', passport.authenticate('local-signup', {successRedirect: '/', failureRedirect: '/signup', failureFlash: true}));
 
 
     router.get('/signin', function (req, res, next) {

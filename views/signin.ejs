@@ -2,23 +2,90 @@
 <html>
 
 <head>
-    <title></title>
+    <title>Sign in - OSS</title>
+    <link rel="stylesheet" href="/css/materialize.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+        .input-field label{
+            pointer-events: all !important;
+        }
+
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active  {
+            -webkit-box-shadow: 0 0 0 30px #37474f inset !important;
+            -webkit-text-fill-color: white !important;
+        }
+
+    </style>
 </head>
 
-<body>
-<% if(error[0]) {%>
-    <h2><%= error[0] %></h2>
-<%}%>
-<form id="signin" name="signin" method="post" action="signin">
-    <label for="email">Email Address</label>
-    <input id="email" class="text" name="email" type="text" />
+<body class="grey darken-4">
 
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" />
+<header>
+    <%- include('header', {page: 'signin'});%>
 
-    <input class="btn" type="submit" value="Sign In" />
-</form>
+</header>
+<main class="container valign-wrapper">
+    <div class="row">
+        <div class="col s12 m10 offset-m1 l8 offset-l2 center card-panel blue-grey darken-3 z-depth-5" style="border-radius: 10px;">
+            <form id="signin" name="signin" method="post" action="signin" class="row">
+                <div class="col s12 center blue darken-2" style="border-radius: 10px 10px 0 0">
+                    <h3 class="white-text" style="margin-top: 16px"><b>Login</b></h3>
+                </div>
+                <div class="col s12 divider grey lighten-1 z-depth-2"></div>
+                <div class="col s12 divider grey lighten-1 z-depth-2" style="margin-bottom: 10px"></div>
+                <% if(error[0]) {%>
+                    <div class="col s12 center">
+                        <h5 class="red-text"><%= error[0] %></h5>
+                    </div>
+                <%}%>
+                <div class="col offset-s1 s10 input-field">
+                    <i class="material-icons prefix white-text">account_circle</i>
+                    <label for="email">Email Address</label>
+                    <input id="email" class="white-text validate" name="email" type="email" required autocomplete="email" />
+                </div>
+
+                <div class="col offset-s1 s10 input-field">
+                    <i class="material-icons prefix white-text">vpn_key</i>
+                    <label for="password" class="">Password</label>
+                    <input id="password" class="white-text validate" name="password" type="password" required autocomplete="current-password"/>
+                </div>
+
+                <div class="col s12 center">
+                    <button class="btn waves-effect waves-light green wave" type="submit" >login</button>
+                </div>
+
+            </form>
+            <div class="row">
+                <div class="col s12 divider grey lighten-1 z-depth-2"></div>
+                <div class="col s12 divider grey lighten-1 z-depth-2"></div>
+            </div>
+            <div class="row">
+                <div class="col s12 center" >
+                    <p class="grey-text" style="margin-top: 0">Don't have an account?</p>
+                </div>
+                <div class="col s12 center">
+                    <a class="btn waves-effect blue" href="/signup">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
 
 </body>
-
+<script src="/js/materialize.js"></script>
 </html>
