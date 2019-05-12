@@ -71,6 +71,7 @@ async function execute(user, commands) {
         states: null
     };
     let otherStatus = [];
+    let asError = false;
     for(const index in stuffsIdDb){
 
         let inDb = stuffsIdDb[index];
@@ -78,16 +79,18 @@ async function execute(user, commands) {
         let objectCommands = getCommand(stuffObject);
         let state =  await objectCommands[command](inDb.uuid,params);
         if(state.status === "SUCCESS"){
-            success.ids.push(inDb.id);
+            success.ids.push(inDb.id.toString());
             if(success.states === null){
                 success.states = state.states;
             }
         }
         else{
+            asError = true;
             otherStatus.push({
-                ids: [inDb.id],
+                ids: [inDb.id.toString()],
                 status: state.status,
-                errorCode: state.errorCode
+                errorCode: state.errorCode,
+                online: state.online
             })
         }
 
@@ -98,7 +101,8 @@ async function execute(user, commands) {
         responseCommands = responseCommands.concat(success);
     if(otherStatus.length > 0)
         responseCommands = responseCommands.concat(otherStatus);
-    return responseCommands;
+
+    return {asError: asError, commands: responseCommands};
 
 }
 

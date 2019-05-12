@@ -25,18 +25,26 @@ app.onExecute(async (body, headers) => {
         }
     }
     let responseCommand = await googleTools.execute(user, body.inputs[0].payload.commands[0]);
-    console.log({
-        requestId: body.requestId,
-        payload: {
-            commands: responseCommand
-        }
-    });
-    return {
-        requestId: body.requestId,
-        payload: {
-            commands: responseCommand
+    let toReturn = {};
+    if(responseCommand.asError){
+        toReturn = {
+            requestId: body.requestId,
+            payload: {
+                commands: responseCommand.commands,
+                // errorCode: "deviceOffline"
+            }
         }
     }
+    else{
+        toReturn = {
+            requestId: body.requestId,
+            payload: {
+                commands: responseCommand.commands
+            }
+        }
+    }
+    console.log(JSON.stringify(toReturn));
+    return toReturn;
 });
 
 app.onQuery(async (body, headers) => {
@@ -60,6 +68,7 @@ app.onQuery(async (body, headers) => {
             toReturn[device.id] = await stuffObject.getState(inDb.uuid);
         }
     }
+    console.log(toReturn);
     return {
         requestId: body.requestId,
         payload: {
@@ -92,7 +101,6 @@ app.onSync(async (body, headers) => {
         }
     };
 });
-
 
 module.exports = app;
 

@@ -3,6 +3,8 @@ var router = express.Router();
 
 module.exports.router = function (passport) {
     router.get('/signup', function (req, res, next) {
+        if (req.isAuthenticated())
+            res.redirect('/');
         res.render('signup',{error: req.flash('error')});
     });
 
@@ -10,6 +12,8 @@ module.exports.router = function (passport) {
 
 
     router.get('/signin', function (req, res, next) {
+        if (req.isAuthenticated())
+            res.redirect('/');
         res.render('signin', {error: req.flash('error')});
     });
 
@@ -44,5 +48,12 @@ module.exports.isLoggedIn = function (req, res, next) {
     if (req.isAuthenticated())
         return next();
     res.redirect('/signin');
+};
+
+module.exports.isLoggedInApi = function (req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    res.status(401);
+    res.send();
 };
 

@@ -342,14 +342,13 @@ const traits = {
         },
         states: {
             brightness: -1,
-            get: function (state) {
-            } // -> query and return the right formatted current state
         },
         commands: {
-            BrightnessAbsolute: function (parameters) {
+            BrightnessAbsolute: function (UUID, params) {
             }
         }
     },
+
     ColorSetting: {  // -> https://developers.google.com/actions/smarthome/traits/colorsetting
         attributes: {
             colorModel: "", // -> if !colorTemperatureRange -> rgb or hsv
@@ -374,12 +373,10 @@ const traits = {
                 hue: 0.0, // -> hue as positive degrees in the range of  [0.0, 360.0]
                 saturation: 0.0, // -> Saturation as a percentage in the range [0.0, 1.0].
                 value: 0.0 // -> Value as a percentage in the range [0.0, 1.0]
-            },
-            get: function (state) {
-            } // -> query and return the right formatted current state
+            }
         },
         commands: {
-            ColorAbsolute: function (parameters) {
+            ColorAbsolute: function (UUID, params) {
             }
         }
     },
@@ -392,11 +389,9 @@ const traits = {
         },
         states: {
             on: false,
-            get: function (state) {
-            } //-> query and return the right formatted current state
         },
         commands: {
-            OnOff: function (parameters) {
+            OnOff: function (UUID, params) {
             }
         }
     }
@@ -413,7 +408,9 @@ exports.types = types;
 exports.traits = traits;
 
 const OSS_OnOffLight = require("./OSS_OnOffLight");
+const OSS_BrightnessLight = require("./OSS_BightnessLight");
 let stuffs = {};
 stuffs.OSS_OnOffLight = OSS_OnOffLight;
+stuffs.OSS_BrightnessLight = OSS_BrightnessLight;
 exports.connectedStuffs = {};
 exports.stuffs = stuffs;

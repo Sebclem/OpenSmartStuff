@@ -1,10 +1,11 @@
 const all = require("./index");
 const googleTools = require("../tools/googleTools");
 const wsTools = require("../tools/WsTools");
+const _ = require ("lodash");
 
 
-let onOffLight = Object.assign({}, all.types.LIGHT);
-let onOffTrait = Object.assign({}, all.traits.OnOff);
+let onOffLight = _.cloneDeep(all.types.LIGHT);
+let onOffTrait = _.cloneDeep(all.traits.OnOff);
 onOffLight.device_info.manufacturer = 'OpenSmartStuff';
 onOffLight.device_info.model = 'OnOffLight';
 onOffLight.device_info.hwVersion = '0.1';
@@ -19,6 +20,8 @@ onOffTrait.commands.OnOff = async function (UUID, params) {
     const connectedStuffs = require('../Stuffs').connectedStuffs;
     if (connectedStuffs[UUID] == null)
         return {
+            status: "OFFLINE",
+            errorCode: 'deviceTurnedOff',
             online: false
         };
 
@@ -27,8 +30,9 @@ onOffTrait.commands.OnOff = async function (UUID, params) {
     let state = await wsTools.waitForResponse(UUID);
     if (state == null) {
         return {
-            status: "ERROR",
-            errorCode: 'deviceTurnedOff'
+            status: "OFFLINE",
+            errorCode: 'deviceTurnedOff',
+            online: false
 
         }
     } else {
@@ -93,4 +97,6 @@ onOffLight.getState = async function (UUID) {
 
 };
 module.exports = onOffLight;
+
+
 

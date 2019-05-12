@@ -21,6 +21,7 @@
             <a href="#" class="brand-logo center">OSS</a>
         <% } %>
         <ul id="drop-account" class="dropdown-content black">
+            <li class="force-google-sync"><a class="center" id="force-google-sync">Force Google Sync</a></li>
             <li class="divider"></li>
             <li><a href="/logout" class="red-text center">Logout</a></li>
         </ul>
@@ -37,26 +38,5 @@
 </ul>
 
 
-<script>
-
-    document.addEventListener('DOMContentLoaded', function () {
-        let elems = document.querySelectorAll('.sidenav');
-        M.Sidenav.init(elems);
-
-        var drops = document.querySelector('#account-trigger');
-        M.Dropdown.init(drops, {
-            coverTrigger: false,
-            alignment: 'right',
-            onOpenStart: () => {
-                let drop = document.querySelector('#li-drop-account');
-                if (!drop.classList.contains("active"))
-                    drop.classList.add("active");
-            },
-            onCloseStart: () => {
-                let drop = document.querySelector('#li-drop-account');
-                if (drop.classList.contains("active"))
-                    drop.classList.remove("active");
-            }
-        });
-    });
-</script>
+<script src="/js/header.js"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>

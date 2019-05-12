@@ -1,8 +1,7 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+#drop-account li:hover{
+  background-color: #212121 !important;
 }
 
-a {
-  color: #00B7FF;
+#toast-container {
+  right: 0.5%;
 }
