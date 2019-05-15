@@ -3,152 +3,66 @@
 
 <head>
     <title>SonOff Setting</title>
-
-    <style>
-        html {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-        }
-        
-        body {
-            background-color: #212121;
-        }
-        
-        label {
-            font-size: 1rem !important;
-        }
-        
-        input {
-            width: 100%;
-            background-color: #212121!important;
-            padding: 10px;
-            border-style: none;
-            color: #bdbdbd;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            margin-top: 5px;
-            width: 100%;
-        }
-        
-        label {
-            color: white;
-            font-size: 1.2rem;
-        }
-        
-        #box {
-            box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            background-color: #37474f;
-        }
-        
-        @media screen and (max-width: 920px) {
-            #box {
-                margin-left: 5%;
-                margin-right: 5%;
-            }
-        }
-        
-        @media screen and (min-width: 920px) {
-            #box {
-                margin-left: 25%;
-                margin-right: 25%;
-            }
-        }
-        
-        .divider {
-            height: 1px;
-            overflow: hidden;
-            background-color: #bdbdbd
-        }
-        
-        .z-depth-2 {
-            box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-        }
-        
-        .mini-box {
-            background-color: #546e7a;
-            border-radius: 10px 10px 10px 10px;
-            padding: 0.5%;
-            margin: 5px 4% 5px 4%;
-            text-align: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-        
-        .input-box {
-            margin-left: 20%;
-            margin-right: 20%;
-            margin-bottom: 10px
-        }
-        
-        button {
-            background-color: #4caf50;
-            font-size: 1rem;
-            color: white;
-            padding: 10px 30px 10px 30px;
-            border-radius: 10px 10px 10px 10px;
-            border-style: none;
-            margin-bottom: 20px;
-            margin-top: 10px;
-        }
-        
-        button:hover {
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-    <main style="margin-top:10vh">
-        <div id="box">
-            <form method="post">
-                <div style="border-radius: 10px 10px 0 0; background-color: #1976D2 !important;overflow: auto;">
-                    <h3 class="white-text" style="text-align: center; color: white; font-size: 2rem"><b>Connect device</b></h3>
-                </div>
-                <div class="divider z-depth-2"></div>
-                <div class="divider z-depth-2" style="margin-bottom: 10px"></div>
+    <main id="box" style="margin-top:10vh">
 
-                <div class="mini-box z-depth-2">
-                    <h4 class="white-text" style="margin-top: 16px;margin-bottom: 16px"><b>Wifi Settings</b></h4>
-                </div>
+        <!-- -------------------------- HEADER END -------------------------- -->
+        <form method="post">
+            <div class="top-blue">
+                <h3 class="white-text" style="text-align: center; font-size: 2rem"><b>Connect device</b></h3>
+            </div>
+            <div class="divider z-depth-2"></div>
+            <div class="divider z-depth-2" style="margin-bottom: 10px"></div>
 
-                <div class="input-box ">
-                    <label for="ssid">Wifi Network Name</label>
-                    <input id="ssid" class="z-depth-2" name="ssid" type="text" value="$ssid" required/>
+            <div class="mini-box z-depth-2">
+                <h4 class="white-text" style="margin-top: 16px;margin-bottom: 16px"><b>Wifi Settings</b></h4>
+            </div>
 
-                </div>
-                <div class="input-box">
-                    <label for="psk">Wifi Password</label>
-                    <input id="psk" class="z-depth-2" name="psk" type="text" value="$psk" required/>
-                </div>
+            <div class="input-box ">
+                <label for="ssid">Wifi Network Name</label>
+                <input id="ssid" class="z-depth-2" name="ssid" type="text" value="$ssid" required/>
 
-                <div class="mini-box z-depth-2">
-                    <h4 class="white-text" style="margin-top: 16px;margin-bottom: 16px"><b>Server Settings</b></h4>
-                </div>
+            </div>
+            <div class="input-box">
+                <label for="psk">Wifi Password</label>
+                <input id="psk" class="z-depth-2" name="psk" type="text" value="$psk" required/>
+            </div>
 
-
-
-                <div class="input-box">
-                    <label for="host">Server host</label>
-                    <input id="host" class="z-depth-2" name="host" type="text" value="$host" required/>
-                </div>
-
-                <div class="input-box">
-                    <label for="uuid">Uuid</label>
-                    <input id="uuid" class="z-depth-2" name="uuid" type="text" value="$uuid" required/>
-                </div>
-
-                <div class="input-box">
-                    <label for="token">Token</label>
-                    <input id="token" class="z-depth-2" name="token" type="text" value="$token" required/>
-                </div>
-
-                <div style="width:100%; text-align: center">
-                    <button type="submit" class="z-depth-2">SAVE</button>
-                </div>
+            <div class="mini-box z-depth-2">
+                <h4 class="white-text" style="margin-top: 16px;margin-bottom: 16px"><b>Server Settings</b></h4>
+            </div>
 
 
-            </form>
-        </div>
+
+            <div class="input-box">
+                <label for="host">Server host</label>
+                <input id="host" class="z-depth-2" name="host" type="text" value="$host" required/>
+            </div>
+
+            <div class="input-box">
+                <label for="uuid">Uuid</label>
+                <input id="uuid" class="z-depth-2" name="uuid" type="text" value="$uuid" required/>
+            </div>
+
+            <div class="input-box">
+                <label for="token">Token</label>
+                <input id="token" class="z-depth-2" name="token" type="text" value="$token" required/>
+            </div>
+
+            <div style="width:100%; text-align: center">
+                <button type="submit" class="z-depth-2">SAVE</button>
+            </div>
+
+
+        </form>
+
+
+
+                <!-- --------------------- FOOTER start-------------------------- -->
+
     </main>
 
 
