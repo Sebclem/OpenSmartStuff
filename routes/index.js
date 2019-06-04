@@ -3,8 +3,9 @@ const router = express.Router();
 const isLoggedIn = require('./auth-manager').isLoggedIn;
 const models = require("../models");
 const userRepo = models.user;
-const google = require("../routes/GoogleSmartHome");
-const light = require("../Stuffs/OSS_OnOffLight");
+const stuffRepo = models.stuffs;
+const googleTools = require("../tools/googleTools");
+const stuffsList = require("../Stuffs").stuffs;
 /* GET home page. */
 router.get('/', isLoggedIn, function(req, res, next) {
   userRepo.findByPk(req.user.id).then((user)=>{
@@ -17,6 +18,12 @@ router.get('/', isLoggedIn, function(req, res, next) {
 });
 
 router.get('/sync', async function (req, res, next) {
+  let inDb = await stuffRepo.findByPk(6);
+  if(inDb){
+    let stuffObject = stuffsList[inDb.type];
+
+    res.send(await stuffObject.getState(inDb));
+      }
 });
 
 

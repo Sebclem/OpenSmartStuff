@@ -65,7 +65,7 @@ app.onQuery(async (body, headers) => {
         if(inDb){
             let stuffObject = stuffsList[inDb.type];
 
-            toReturn[device.id] = await stuffObject.getState(inDb.uuid);
+            toReturn[device.id] = await stuffObject.getGoogleState(inDb);
         }
     }
     console.log(toReturn);
@@ -93,6 +93,7 @@ app.onSync(async (body, headers) => {
         let stuffObject = stuffsList[stuff.type];
         devices.push(stuffObject.getSync(stuff));
     });
+    console.log(devices);
     return {
         requestId: body.requestId,
         payload: {

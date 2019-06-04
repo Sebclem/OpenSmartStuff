@@ -4,11 +4,12 @@ const wsTools = require("../tools/WsTools");
 const _ = require("lodash");
 
 
-let brightnessLight = _.cloneDeep(all.types.LIGHT);
+let brightnessLight = _.cloneDeep(all.stuffTemplate);
 brightnessLight.device_info.manufacturer = 'OpenSmartStuff';
 brightnessLight.device_info.model = 'BrightnessLight';
 brightnessLight.device_info.hwVersion = '0.1';
 brightnessLight.device_info.swVersion = '0.1';
+brightnessLight.type = all.types.LIGHT;
 
 
 let onOffTrait = _.cloneDeep(all.traits.OnOff);
@@ -52,7 +53,8 @@ onOffTrait.commands.OnOff = async function (UUID, params) {
 brightnessLight.traits.OnOff = onOffTrait;
 
 let brightnessTrait = _.cloneDeep(all.traits.Brightness);
-brightnessTrait.commands.BrightnessAbsolute = async function (UUID, params) {
+brightnessTrait.commands.BrightnessAbsolute = async function (inDb, params) {
+    let UUID = inDb.uuid;
     let isOn = params.on;
     let brightness = params.brightness;
     const connectedStuffs = require('../Stuffs').connectedStuffs;
@@ -93,7 +95,7 @@ brightnessLight.getSync = function (stuffInDb) {
 
     let finalObject = {
         id: stuffInDb.id,
-        type: googleTools.convertType('LIGHT'),
+        type: googleTools.convertType(brightnessLight.type),
         name: {
             defaultNames: ["Light"],
             name: stuffInDb.name,
@@ -108,7 +110,8 @@ brightnessLight.getSync = function (stuffInDb) {
     return finalObject;
 };
 
-brightnessLight.getState = async function (UUID) {
+brightnessLight.getGoogleState = async function (inDb) {
+    let UUID = inDb.uuid;
     const connectedStuffs = require('../Stuffs').connectedStuffs;
     if (connectedStuffs[UUID] == null)
         return {

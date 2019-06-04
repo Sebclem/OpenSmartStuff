@@ -77,7 +77,7 @@ async function execute(user, commands) {
         let inDb = stuffsIdDb[index];
         let stuffObject = stuffsList[inDb.type];
         let objectCommands = getCommand(stuffObject);
-        let state =  await objectCommands[command](inDb.uuid,params);
+        let state =  await objectCommands[command](inDb,params);
         if(state.status === "SUCCESS"){
             success.ids.push(inDb.id.toString());
             if(success.states === null){

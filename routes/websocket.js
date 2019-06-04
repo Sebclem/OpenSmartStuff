@@ -14,6 +14,7 @@ exports.createWS = function (server) {
 
             //log the received message and send it back to the client
             let received = JSON.parse(message);
+            console.log(received);
             if (received.type === "AUTH") {
                 console.debug("[WS] AUTH Receive, UUID: " + received.uuid + " Token: " + received.token);
                 stuffRepo.findOne({where: {uuid: received.uuid, token: received.token}}).then((finded) => {

@@ -1,13 +1,34 @@
-<form method="post">
-    <div class="top-blue">
-        <h3 class="white-text" style="text-align: center; font-size: 2rem"><b>Change Admin Password</b></h3>
-    </div>
-    <div class="divider z-depth-2"></div>
-    <div class="divider z-depth-2" style="margin-bottom: 10px"></div>
-    %curentPass
-    <div class="input-box ">
-        <label for="ssid">Password</label>
-        <input id="ssid" class="z-depth-2" name="ssid" type="password" value="$ssid" autocomplete="new-password" required/>
-    </div>
+<!DOCTYPE html>
+<html>
 
-</form>
+<head>
+    <title>SonOff Setting</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <main id="box">
+
+        <!-- -------------------------- HEADER END -------------------------- -->
+
+        <form method="post">
+            <div class="top-blue">
+                <h3 class="white-text" style="text-align: center; font-size: 2rem"><b>Change Password</b></h3>
+            </div>
+            <div class="divider z-depth-2"></div>
+            <div class="divider z-depth-2" style="margin-bottom: 10px"></div>
+            <div class="input-box "> <p style="color: red; text-align: center"></p> </div>
+            %curentPass
+            <div class="input-box "> <label for="newPassword">New Password</label> <input id="newPassword" class="z-depth-2" name="newPassword" type="password" autocomplete="new-password" required/> </div>
+            <div style="width:100%; text-align: center"><button type="submit" class="z-depth-2">SAVE</button></div>
+        </form>
+        <!-- --------------------- FOOTER start-------------------------- -->
+
+    </main>
+
+
+</body>
+
+
+
+</html>

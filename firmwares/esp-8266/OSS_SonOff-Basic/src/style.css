@@ -1,18 +1,20 @@
 html {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif
 }
 
 body {
     background-color: #212121;
-    color: white;
+    color: white
 }
-.top-blue{
-    border-radius: 10px 10px 0 0; 
+
+.top-blue {
+    border-radius: 10px 10px 0 0;
     background-color: #1976D2;
-    overflow: auto;
+    overflow: auto
 }
+
 label {
-    font-size: 1rem;
+    font-size: 1rem
 }
 
 input {
@@ -23,30 +25,40 @@ input {
     color: #bdbdbd;
     border-radius: 10px;
     font-size: 1.2rem;
-    margin-top: 5px;
+    margin-top: 5px
 }
 
 label {
-    font-size: 1.2rem;
+    font-size: 1.2rem
 }
 
 #box {
     box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    background-color: #37474f;
+    background-color: #37474f
 }
 
 @media screen and (max-width: 920px) {
     #box {
+        margin-top: 2vh;
         margin-left: 5%;
-        margin-right: 5%;
+        margin-right: 5%
+    }
+    .input-box{
+        margin-left: 4%;
+        margin-right: 4%;
     }
 }
 
 @media screen and (min-width: 920px) {
     #box {
+        margin-top: 5vh;
         margin-left: 25%;
-        margin-right: 25%;
+        margin-right: 25%
+    }
+    .input-box{
+        margin-left: 20%;
+        margin-right: 20%;
     }
 }
 
@@ -57,7 +69,7 @@ label {
 }
 
 .z-depth-2 {
-    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3)
 }
 
 .mini-box {
@@ -66,17 +78,14 @@ label {
     padding: 0.5%;
     margin: 5px 4% 5px 4%;
     text-align: center;
-
-    font-size: 1.5rem;
+    font-size: 1.5rem
 }
 
 .input-box {
-    margin-left: 20%;
-    margin-right: 20%;
     margin-bottom: 10px
 }
 
-button {
+button, a.button {
     background-color: #4caf50;
     font-size: 1rem;
     padding: 10px 30px 10px 30px;
@@ -84,8 +93,14 @@ button {
     border-style: none;
     margin-bottom: 20px;
     margin-top: 10px;
+    color: black;
+    text-decoration: none;
 }
 
 button:hover {
-    cursor: pointer;
+    cursor: pointer
+}
+
+a.button {
+    display: inline-block;
 }

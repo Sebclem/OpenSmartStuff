@@ -4,18 +4,18 @@ const wsTools = require("../tools/WsTools");
 const _ = require ("lodash");
 
 
-let onOffLight = _.cloneDeep(all.types.LIGHT);
+let onOffLight = _.cloneDeep(all.stuffTemplate);
 let onOffTrait = _.cloneDeep(all.traits.OnOff);
 onOffLight.device_info.manufacturer = 'OpenSmartStuff';
 onOffLight.device_info.model = 'OnOffLight';
 onOffLight.device_info.hwVersion = '0.1';
 onOffLight.device_info.swVersion = '0.1';
+onOffLight.type = all.types.LIGHT;
 
-onOffTrait.states.get = function (state) {
-    console.log("Get for id " + id);
-};
 
-onOffTrait.commands.OnOff = async function (UUID, params) {
+onOffTrait.commands.OnOff = async function (inDb, params) {
+    let UUID = inDb.uuid;
+    let option = JSON.parse(inDb.option);
     let isOn = params.on;
     const connectedStuffs = require('../Stuffs').connectedStuffs;
     if (connectedStuffs[UUID] == null)
@@ -26,7 +26,7 @@ onOffTrait.commands.OnOff = async function (UUID, params) {
         };
 
     let ws = connectedStuffs[UUID].ws;
-    ws.send(JSON.stringify({type: "COMMAND", on: isOn}));
+    ws.send(JSON.stringify({type: "COMMAND", on: isOn, option : option}));
     let state = await wsTools.waitForResponse(UUID);
     if (state == null) {
         return {
@@ -56,7 +56,7 @@ onOffLight.getSync = function (stuffInDb) {
 
     let finalObject = {
         id: stuffInDb.id,
-        type: googleTools.convertType('LIGHT'),
+        type: googleTools.convertType(onOffLight.type),
         name: {
             defaultNames: ["Light"],
             name : stuffInDb.name,
@@ -71,7 +71,9 @@ onOffLight.getSync = function (stuffInDb) {
     return finalObject;
 };
 
-onOffLight.getState = async function (UUID) {
+onOffLight.getGoogleState = async function (inDb) {
+    let UUID = inDb.uuid;
+    let option = JSON.parse(inDb.option);
     const connectedStuffs = require('../Stuffs').connectedStuffs;
     if(connectedStuffs[UUID] == null)
         return {
@@ -79,7 +81,7 @@ onOffLight.getState = async function (UUID) {
         };
 
     let ws = connectedStuffs[UUID].ws;
-    ws.send(JSON.stringify({type: "GET_STATE"}));
+    ws.send(JSON.stringify({type: "GET_STATE", option: option}));
     let state = await wsTools.waitForResponse(UUID);
     if(state == null){
         return {
@@ -96,6 +98,7 @@ onOffLight.getState = async function (UUID) {
 
 
 };
+
 module.exports = onOffLight;
 
 

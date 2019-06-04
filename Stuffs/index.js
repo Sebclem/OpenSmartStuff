@@ -1,335 +1,74 @@
-const types = {
-    AC_UNIT: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
 
-        }
-
+const wsTools = require("../tools/WsTools");
+const stuffTemplate = {
+    type:"",
+    traits: {},
+    device_info: {
+        manufacturer: '',
+        model: '',
+        hwVersion: '',
+        swVersion: ''
     },
-    AIRFRESHENER: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
+    getSync: function (stuffInDb) {
     },
-    AIRPURIFIER: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
+    getState: async function(inDb) {
+        let UUID = inDb.uuid;
+        let option = JSON.parse(inDb.option);
+        const connectedStuffs = require('../Stuffs').connectedStuffs;
+        if (connectedStuffs[UUID] == null)
+            return {
+                online: false
+            };
 
+        let ws = connectedStuffs[UUID].ws;
+        ws.send(JSON.stringify({type: "GET_STATE", option: option}));
+        let state = await wsTools.waitForResponse(UUID);
+        if (state == null) {
+            return {
+                online: false
+            }
+        } else {
+
+            return {
+                online: true,
+                state: state
+            }
         }
     },
-    BLINDS: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
+    getGoogleState: function (inDb) {
     },
-    CAMERA: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
+    updateState: function (stateObject) {
 
-        }
     },
-    COFFEE_MAKER: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    DISHWASHER: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    DRYER: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    FAN: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    FIREPLACE: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    HEATER: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    KETTLE: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    LIGHT: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    OUTLET: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    OVEN: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    REFRIGERATOR: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    SCENE: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    SPRINKLER: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    SWITCH: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    THERMOSTAT: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    VACUUM: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
-    },
-    WASHER: {
-        traits: {},
-        device_info: {
-            manufacturer: '',
-            model: '',
-            hwVersion: '',
-            swVersion: ''
-        },
-        getSync: function (stuffInDb) {
-        },
-        getState: function(UUID){},
-        updateState: function (stateObject) {
-
-        }
+    getWidget : function () {
+        
     }
+};
+
+
+const types = {
+    AC_UNIT: "AC_UNIT",
+    AIRFRESHENER: "AIRFRESHENER",
+    AIRPURIFIER: "AIRPURIFIER",
+    BLINDS: "BLINDS",
+    CAMERA: "CAMERA",
+    COFFEE_MAKER: "COFFEE_MAKER",
+    DISHWASHER: "DISHWASHER",
+    DRYER: "DRYER",
+    FAN: "FAN",
+    FIREPLACE: "FIREPLACE",
+    HEATER: "HEATER",
+    KETTLE: "KETTLE",
+    LIGHT: "LIGHT",
+    OUTLET: "OUTLET",
+    OVEN: "OVEN",
+    REFRIGERATOR: "REFRIGERATOR",
+    SCENE: "SCENE",
+    SPRINKLER: "SPRINKLERr",
+    SWITCH: "SWITCH",
+    THERMOSTAT: "THERMOSTAT",
+    VACUUM: "VACUUM",
+    WASHER: "WASHER"
 };
 
 
@@ -394,23 +133,58 @@ const traits = {
             OnOff: function (UUID, params) {
             }
         }
-    }
+    },
+    TemperatureSetting: {  // -> https://developers.google.com/actions/smarthome/traits/colorsetting
+        attributes: {
+            availableThermostatModes: "", // -> https://developers.google.com/actions/smarthome/traits/temperaturesetting#device-attributes
+            thermostatTemperatureUnit: "C", // C or F
+            bufferRangeCelsius: 2, // Double. Optional. If unset, defaults to 2 degrees Celsius. Specifies the minimum offset between heat-cool setpoints in Celsius, if heatcool mode is supported.
+            commandOnlyTemperatureSetting: false,
+            queryOnlyTemperatureSetting: false,
+            get: (temperatureSetting) => {
+
+                if(temperatureSetting.attributes.queryOnlyTemperatureSetting){
+                    return {queryOnlyTemperatureSetting: true, thermostatTemperatureUnit: temperatureSetting.attributes.thermostatTemperatureUnit}
+                }
+                return temperatureSetting.attributes;
+            }
+
+        },
+        states: {
+            thermostatMode: "",
+            thermostatTemperatureSetpoint: -1,
+            thermostatTemperatureAmbient: -1,
+            thermostatTemperatureSetpointHigh: -1,
+            thermostatTemperatureSetpointLow: -1,
+            thermostatHumidityAmbient: -1
+
+        },
+        commands: {
+            ThermostatTemperatureSetpoint: function (UUID, params) {
+            },
+            ThermostatTemperatureSetRange: function (UUID, params) {
+            },
+            ThermostatSetMode: function (UUID, params) {
+            },
+            TemperatureRelative: function (UUID, params) {
+            }
+        }
+    },
 
 
 };
 
 
-
-
-
-
 exports.types = types;
 exports.traits = traits;
+exports.stuffTemplate = stuffTemplate;
 
 const OSS_OnOffLight = require("./OSS_OnOffLight");
 const OSS_BrightnessLight = require("./OSS_BightnessLight");
+const OSS_BME280 = require("./OSS_BME280");
 let stuffs = {};
 stuffs.OSS_OnOffLight = OSS_OnOffLight;
 stuffs.OSS_BrightnessLight = OSS_BrightnessLight;
+stuffs.OSS_BME280 = OSS_BME280;
 exports.connectedStuffs = {};
 exports.stuffs = stuffs;

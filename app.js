@@ -41,6 +41,7 @@ const usersRouter = require('./routes/users');
 const authManager = require('./routes/auth-manager').router(passport);
 const google = require('./routes/GoogleSmartHome');
 const googleApi = require('./routes/googleApi');
+const stuffApi = require('./routes/StuffApi');
 
 
 // view engine setup
@@ -59,6 +60,7 @@ app.use('/users', usersRouter);
 app.use('/', oauth);
 app.use('/', authManager);
 app.use('/', googleApi);
+app.use('/', stuffApi);
 app.post('/googleAPI', google);
 
 // catch 404 and forward to error handler
